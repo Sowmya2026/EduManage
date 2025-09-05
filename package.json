@@ -2,11 +2,13 @@
   "name": "school-management",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Sowmya2026.github.io/EduManage",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build && next export"
   },
   "dependencies": {
     "formidable": "^3.5.4",

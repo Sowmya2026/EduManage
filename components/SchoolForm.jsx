@@ -36,7 +36,7 @@ export default function SchoolForm({ onSubmit, register, errors, isSubmitting })
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* School Name */}
         <div>
-          <label htmlFor="name" className="form-label">School Name *</label>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">School Name *</label>
           <input
             type="text"
             id="name"
@@ -55,7 +55,7 @@ export default function SchoolForm({ onSubmit, register, errors, isSubmitting })
 
         {/* Email */}
         <div>
-          <label htmlFor="email_id" className="form-label">Email Address *</label>
+          <label htmlFor="email_id" className="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
           <input
             type="email"
             id="email_id"
@@ -74,7 +74,7 @@ export default function SchoolForm({ onSubmit, register, errors, isSubmitting })
 
         {/* Address */}
         <div className="md:col-span-2">
-          <label htmlFor="address" className="form-label">Address *</label>
+          <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">Address *</label>
           <input
             type="text"
             id="address"
@@ -93,7 +93,7 @@ export default function SchoolForm({ onSubmit, register, errors, isSubmitting })
 
         {/* City */}
         <div>
-          <label htmlFor="city" className="form-label">City *</label>
+          <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">City *</label>
           <input
             type="text"
             id="city"
@@ -112,7 +112,7 @@ export default function SchoolForm({ onSubmit, register, errors, isSubmitting })
 
         {/* State */}
         <div>
-          <label htmlFor="state" className="form-label">State *</label>
+          <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">State *</label>
           <input
             type="text"
             id="state"
@@ -131,12 +131,12 @@ export default function SchoolForm({ onSubmit, register, errors, isSubmitting })
 
         {/* Contact Number */}
         <div>
-          <label htmlFor="contact" className="form-label">Contact Number *</label>
+          <label htmlFor="contact" className="block text-sm font-medium text-gray-700 mb-1">Contact Number *</label>
           <input
             type="tel"
             id="contact"
             className="input-field"
-            placeholder="Enter contact number (e.g., 123-456-7890)"
+            placeholder="Enter contact number"
             {...register("contact", { 
               required: "Contact number is required",
               pattern: {
@@ -158,13 +158,13 @@ export default function SchoolForm({ onSubmit, register, errors, isSubmitting })
 
         {/* Image Upload */}
         <div className="md:col-span-2">
-          <label htmlFor="image" className="form-label">School Image</label>
+          <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">School Image</label>
           <div className="flex flex-col md:flex-row items-center gap-4">
             <div className="flex-1">
               <div className="flex items-center justify-center w-full">
-                <label htmlFor="image" className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer border-gray-300 hover:border-primary-500 transition-colors">
+                <label htmlFor="image" className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer border-gray-300 hover:border-[#328E6E] transition-colors bg-gray-50">
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <svg className="w-8 h-8 mb-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="w-8 h-8 mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                     </svg>
                     <p className="mb-2 text-sm text-gray-500">Click to upload or drag and drop</p>
@@ -219,7 +219,8 @@ export default function SchoolForm({ onSubmit, register, errors, isSubmitting })
         <button
           type="submit"
           disabled={isSubmitting}
-          className="btn-primary flex items-center justify-center min-w-[120px] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="btn-primary flex items-center justify-center min-w-[120px] disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 transition-transform duration-300"
+          style={{backgroundColor: '#328E6E'}}
         >
           {isSubmitting ? (
             <>
@@ -239,6 +240,33 @@ export default function SchoolForm({ onSubmit, register, errors, isSubmitting })
           )}
         </button>
       </div>
+
+      <style jsx global>{`
+        .input-field {
+          border: 1px solid #D1D5DB;
+          border-radius: 0.375rem;
+          padding: 0.5rem 0.75rem;
+          width: 100%;
+          transition: all 0.3s;
+        }
+        .input-field:focus {
+          outline: none;
+          ring: 2px;
+          ring-color: #328E6E;
+          border-color: #328E6E;
+        }
+        .btn-primary {
+          background-color: #328E6E;
+          color: white;
+          padding: 0.5rem 1.5rem;
+          border-radius: 0.375rem;
+          font-weight: 600;
+          transition: all 0.3s;
+        }
+        .btn-primary:hover {
+          background-color: #267155;
+        }
+      `}</style>
     </form>
   );
 }

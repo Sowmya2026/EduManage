@@ -3,9 +3,9 @@ import Link from 'next/link';
 
 export default function DatabaseInfo() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-[#E1EEBC] to-[#90C67C]">
       <Head>
-        <title>Database Storage - School Management System</title>
+        <title>Database Storage - EduKids</title>
         <meta name="description" content="Learn about our secure database storage system" />
       </Head>
 
@@ -14,18 +14,18 @@ export default function DatabaseInfo() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <Link href="/" className="text-xl font-bold text-primary-600">
-                EduManage
+              <Link href="/" className="text-xl font-bold text-[#328E6E]">
+                EduKids
               </Link>
             </div>
             <div className="flex items-center space-x-4">
-              <Link href="/" className="text-gray-700 hover:text-primary-600 transition-colors">
+              <Link href="/" className="text-gray-700 hover:text-[#328E6E] transition-colors">
                 Home
               </Link>
-              <Link href="/addSchool" className="text-gray-700 hover:text-primary-600 transition-colors">
+              <Link href="/addSchool" className="text-gray-700 hover:text-[#328E6E] transition-colors">
                 Add School
               </Link>
-              <Link href="/showSchools" className="text-gray-700 hover:text-primary-600 transition-colors">
+              <Link href="/showSchools" className="text-gray-700 hover:text-[#328E6E] transition-colors">
                 View Schools
               </Link>
             </div>
@@ -35,8 +35,8 @@ export default function DatabaseInfo() {
 
       <main className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Database Storage System</h1>
-          <p className="text-gray-600">Learn how your school data is securely stored and managed</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Safe Data Storage</h1>
+          <p className="text-gray-700">Learn how your school data is securely stored and managed</p>
         </div>
 
         <div className="bg-white rounded-xl shadow-md p-6 md:p-8">
@@ -46,8 +46,8 @@ export default function DatabaseInfo() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-blue-50 p-4 rounded-lg">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                  <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Security Features</h3>
@@ -61,8 +61,8 @@ export default function DatabaseInfo() {
 
               <div className="bg-green-50 p-4 rounded-lg">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-3">
-                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+                  <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Database Features</h3>
@@ -113,10 +113,10 @@ export default function DatabaseInfo() {
             </div>
 
             <div className="flex justify-center mt-8">
-              <Link href="/showSchools" className="btn-primary mr-4">
+              <Link href="/showSchools" className="btn-primary mr-4" style={{backgroundColor: '#328E6E'}}>
                 View Schools Data
               </Link>
-              <Link href="/addSchool" className="btn-secondary">
+              <Link href="/addSchool" className="btn-secondary" style={{backgroundColor: '#67AE6E'}}>
                 Add New School
               </Link>
             </div>
