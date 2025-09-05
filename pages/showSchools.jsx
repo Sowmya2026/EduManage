@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import SchoolCard from '../components/SchoolCard';
 
 export default function ShowSchools() {
@@ -8,6 +9,7 @@ export default function ShowSchools() {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterState, setFilterState] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     fetchSchools();
@@ -60,39 +62,79 @@ export default function ShowSchools() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#E1EEBC] to-[#90C67C]">
       <Head>
-        <title>View Schools - EduKids</title>
+        <title>View Schools - EduManage</title>
         <meta name="description" content="Browse all schools in the management system" />
       </Head>
 
       {/* Navigation */}
-      <nav className="bg-white shadow-lg">
+      <nav className="bg-white shadow-lg relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <h1 className="text-xl font-bold text-[#328E6E]">
-                <a href="/">EduManage</a>
+              <h1 className="text-2xl font-bold text-[#328E6E]">
+                EduManage
               </h1>
             </div>
-            <div className="flex items-center space-x-4">
-              <a href="/" className="text-gray-700 hover:text-[#328E6E] transition-colors">
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-4">
+              <Link href="/" className="btn-primary">
                 Home
-              </a>
-              <a href="/addSchool" className="text-gray-700 hover:text-[#328E6E] transition-colors">
+              </Link>
+              <Link href="/addSchool" className="btn-secondary">
                 Add School
-              </a>
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-700 hover:text-[#328E6E] focus:outline-none"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {isMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
             </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden animate-slide-down">
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <Link 
+                  href="/" 
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-[#328E6E] transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Home
+                </Link>
+                <Link 
+                  href="/addSchool" 
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-[#328E6E] transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Add School
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
       <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 animate-fade-in-up">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Our Schools</h1>
           <p className="text-gray-700">Discover all the amazing schools in our system</p>
         </div>
 
         {/* Filters */}
-        <div className="mb-8 bg-white p-4 rounded-xl shadow-md">
+        <div className="mb-8 bg-white p-4 rounded-xl shadow-md animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-1">Search by name or city</label>
@@ -138,7 +180,7 @@ export default function ShowSchools() {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">
+          <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg animate-shake">
             {error}
           </div>
         )}
@@ -151,7 +193,7 @@ export default function ShowSchools() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-white rounded-xl shadow-md">
+          <div className="text-center py-12 bg-white rounded-xl shadow-md animate-fade-in-up">
             <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
@@ -161,10 +203,41 @@ export default function ShowSchools() {
         )}
 
         {/* Results count */}
-        <div className="mt-8 text-center text-gray-700">
+        <div className="mt-8 text-center text-gray-700 animate-fade-in-up">
           Showing {filteredSchools.length} of {schools.length} schools
         </div>
       </main>
+
+      <style jsx global>{`
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+          20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake {
+          animation: shake 0.5s ease-in-out;
+        }
+        .input-field {
+          border: 1px solid #D1D5DB;
+          border-radius: 0.375rem;
+          padding: 0.5rem 0.75rem;
+          width: 100%;
+          transition: all 0.3s;
+        }
+        .input-field:focus {
+          outline: none;
+          ring: 2px;
+          ring-color: #328E6E;
+          border-color: #328E6E;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+          .input-field {
+            padding: 0.75rem;
+          }
+        }
+      `}</style>
     </div>
   );
 }

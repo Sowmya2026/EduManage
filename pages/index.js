@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -63,7 +64,9 @@ export default function Home() {
             <div className="flex items-center">
               <h1 className="text-2xl font-bold text-[#328E6E]">EduManage</h1>
             </div>
-            <div className="flex items-center space-x-4">
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-4">
               <Link href="/addSchool" className="btn-primary">
                 Add School
               </Link>
@@ -71,7 +74,45 @@ export default function Home() {
                 View Schools
               </Link>
             </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-700 hover:text-[#328E6E] focus:outline-none"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {isMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden animate-slide-down">
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <Link 
+                  href="/addSchool" 
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-[#328E6E] transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Add School
+                </Link>
+                <Link 
+                  href="/showSchools" 
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-[#328E6E] transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  View Schools
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -87,7 +128,7 @@ export default function Home() {
               </div>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6">
-              Fun <span className="text-[#328E6E]">School Management</span>
+              NextGen <br /> <span className="text-[#328E6E]">School Management</span>
             </h1>
             <p className="text-xl text-gray-700 mb-10 max-w-3xl mx-auto">
               A colorful, friendly system to manage school information with fun animations and easy-to-use features.
@@ -166,18 +207,19 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 bg-gradient-to-b from-[#67AE6E] to-[#328E6E] relative z-10">
+<section className="py-16 bg-gradient-to-b from-[#67AE6E] to-[#328E6E] relative z-10">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 className="text-3xl font-bold text-center text-white mb-12">How It Works</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <h2 className="text-3xl font-bold text-center text-white mb-12 animate-fade-in">How It Works</h2>
+    
+    <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
       {[
         {
           step: 1,
           title: "Add Your School",
-          desc: "Fill out our fun form with school details",
+          desc: "Fill out our simple form with school details",
           icon: (
             <svg
-              className="w-8 h-8 text-[#328E6E]"
+              className="w-10 h-10 text-[#328E6E]"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +235,7 @@ export default function Home() {
           desc: "Browse through all the schools in our system",
           icon: (
             <svg
-              className="w-8 h-8 text-[#328E6E]"
+              className="w-10 h-10 text-[#328E6E]"
               fill="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
@@ -209,7 +251,7 @@ export default function Home() {
           desc: "Update or view information anytime",
           icon: (
             <svg
-              className="w-8 h-8 text-[#328E6E]"
+              className="w-10 h-10 text-[#328E6E]"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -225,28 +267,34 @@ export default function Home() {
       ].map((item, index) => (
         <div
           key={index}
-          className="bg-white rounded-xl p-6 text-center transform hover:scale-105 transition-transform duration-300 shadow-md"
+          className="flex flex-col items-center text-center text-white animate-fade-in-up"
+          style={{ animationDelay: `${index * 0.15}s` }}
         >
-          <div className="w-16 h-16 bg-[#E1EEBC] rounded-full flex items-center justify-center mx-auto mb-4">
-            {item.icon}
-          </div>
-          <div className="w-8 h-8 bg-[#328E6E] text-white rounded-full flex items-center justify-center mx-auto mb-4 text-sm font-bold">
+          {/* Step Number */}
+          <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-6 text-lg font-bold border-2 border-white/30">
             {item.step}
           </div>
-          <h3 className="text-xl font-semibold mb-2 text-gray-900">{item.title}</h3>
-          <p className="text-gray-600">{item.desc}</p>
+          
+          {/* Icon */}
+          <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg transform hover:scale-110 transition-transform duration-300">
+            {item.icon}
+          </div>
+          
+          {/* Content */}
+          <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+          <p className="text-white/90 max-w-xs">{item.desc}</p>
+          
         </div>
       ))}
     </div>
   </div>
 </section>
 
-
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; {new Date().getFullYear()} EduKids School System. All rights reserved.</p>
-          <div className="mt-4 flex justify-center space-x-6">
+          <p>&copy; {new Date().getFullYear()} EduManage School System. All rights reserved.</p>
+          <div className="mt-4 flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-6">
             <Link href="/" className="text-gray-300 hover:text-white transition-colors">
               Home
             </Link>
@@ -266,12 +314,6 @@ export default function Home() {
           50% { transform: translateY(-20px) rotate(5deg); }
           100% { transform: translateY(0) rotate(0deg); }
         }
-        .animate-float {
-          animation: float 10s ease-in-out infinite;
-        }
-        .animate-fade-in-up {
-          animation: fadeInUp 0.8s ease-out;
-        }
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -281,6 +323,25 @@ export default function Home() {
             opacity: 1;
             transform: translateY(0);
           }
+        }
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-float {
+          animation: float 10s ease-in-out infinite;
+        }
+        .animate-fade-in-up {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .animate-slide-down {
+          animation: slideDown 0.3s ease-out forwards;
         }
         .btn-primary {
           background-color: #328E6E;
@@ -310,7 +371,47 @@ export default function Home() {
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
           transition: all 0.3s;
         }
-      `}</style>
+        .card:hover {
+          box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+          transform: translateY(-5px);
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+          .btn-primary, .btn-secondary {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+          }
+        }
+          @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+  `}
+    </style>
     </div>
   );
 }
